@@ -1,0 +1,35 @@
+# Provides: mydaemon.service
+# Required-Start: $all
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop:
+# Short-Description: this is my daemon service
+### END INIT INFO
+
+VOLUME=4000000;
+FIRST_LOG_DOCUMENT="/var/log/nginx/mydom4in.tk-access.log";
+SECOND_LOG_DOCUMENT="/var/log/nginx/mydom4in.tk-error.log";
+FIRST_SCRIPT_FILE="/var/www/mydom4in.tk/html/file1.txt";
+SECOND_SCRIPT_FILE="/var/www/mydom4in.tk/html/file2.txt";
+THIRD_SCRIPT_FILE="/var/www/mydom4in.tk/html/file3.txt";
+FOURTH_SCRIPT_FILE="/var/www/mydom4in.tk/html/file4.txt";
+cat $FIRST_LOG_DOCUMENT >> $FIRST_SCRIPT_FILE;
+cat $SECOND_LOG_DOCUMENT >> $FIRST_SCRIPT_FILE;
+cat /dev/null > $FIRST_LOG_DOCUMENT;
+cat /dev/null > $SECOND_LOG_DOCUMENT;
+
+while true; do
+sleep 6h;
+cat $FIRST_LOG_DOCUMENT >> $FIRST_SCRIPT_FILE;
+cat $SECOND_LOG_DOCUMENT >> $FIRST_SCRIPT_FILE;
+cat /dev/null > $FIRST_LOG_DOCUMENT;
+cat /dev/null > $SECOND_LOG_DOCUMENT;
+cat $FIRST_SCRIPT_FILE | grep '5[0-9][0-9]' > $THIRD_SCRIPT_FILE;
+cat $FIRST_SCRIPT_FILE | grep '4[0-9][0-9]' > $FOURTH_SCRIPT_FILE;
+FILE_VOLUME=`wc -c $FIRST_SCRIPT_FILE | awk '{print $1}'`;
+if [ $VOLUME -lt $FILE_VOLUME ]; then
+cat /dev/null > $FIRST_SCRIPT_FILE;
+echo "Successfull clear of log files: " >> $SECOND_SCRIPT_FILE;
+echo `date -u` >> $SECOND_SCRIPT_FILE;
+fi
+done

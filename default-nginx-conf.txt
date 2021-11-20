@@ -1,0 +1,67 @@
+server {
+        listen 80;
+        listen [::]:80;
+        #listen 81;
+
+        root /var/www/mydom4in.tk/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        #server_name _;
+        server_name mydom4in.tk www.mydom4in.tk;
+
+        return 301 https://mydom4in.tk$request_uri;
+
+        access_log /var/log/nginx/mydom4in.tk-access.log;
+        error_log /var/log/nginx/mydom4in.tk-error.log;
+
+        location / {
+                #proxy_pass http://18.217.194.230:8080;
+                proxy_pass http://mydom4in.tk:8080;
+                #proxy_pass http://localhost:8080;
+                proxy_set_header Host $http_host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                try_files $uri $uri/ =404;
+        }
+
+        location /secondserver {
+                return 301 $scheme://vk.com/trapmehanikbillioner;
+        }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    listen 81 ssl http2;
+
+    root /var/www/mydom4in.tk/html;
+    index index.html index.htm;
+
+    server_name www.mydom4in.tk.com mydom4in.tk;
+
+    #return 301 https://mydom4in.tk$request_uri;
+
+    access_log /var/log/nginx/mydom4in.tk-access.log;
+        error_log /var/log/nginx/mydom4in.tk-error.log;
+
+
+    ssl_certificate /etc/letsencrypt/live/mydom4in.tk/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mydom4in.tk/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/mydom4in.tk/chain.pem;
+
+    include snippets/ssl-params.conf;
+        location / {
+                #proxy_pass http://18.217.194.230:8080;
+                proxy_pass http://mydom4in.tk:8080;
+                #proxy_pass http://localhost:8080;
+                proxy_set_header Host $http_host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                try_files $uri $uri/ =404;
+        }
+
+        location /secondserver {
+                return 301 $scheme://vk.com/trapmehanikbillioner;
+        }
+}
