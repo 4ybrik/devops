@@ -1,0 +1,53 @@
+---
+ - name: Install jenkins and upload web Page
+   hosts: all
+   become: yes
+
+
+   vars:
+    source_file: ./WebSite/index.html
+    destin_file: /var/www/html
+    script_src: ./jenkins-inst.sh
+    script_dest: /var/www/html
+    container_name: nginx-test
+
+   tasks:
+#    - name: Install
+#      apt: name=unzip state=latest
+
+
+    - name: Copy MyNamePage to Servers
+      copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+#      notify: Restart jenkins
+
+    - name: Start nginx and enable on boot
+      service: name=nginx state=started enabled=yes
+
+#   handlers:
+#    - name: Restart jenkins
+#      service: name=unzip state=restarted
+
+    - name: Cloning github repo #1
+      git:
+        repo: https://github.com/4ybrik/simple-java-maven-app.git
+        dest: ~/ansible/repo1
+        clone: yes
+        update: yes
+
+    - name: Cloning github repo #2
+      git:
+	repo: https://github.com/4ybrik/simple-node-js-react-npm-app.git
+        dest: ~/ansible/repo2
+        clone: yes
+        update: yes
+
+#    - name: Install script
+#      script:
+#        copy: src={{ script_src }} dest={{ script_dest }} mode=0600
+#
+#
+#    - name: Start script
+#      script:
+#        command: ~/jenkins-inst.sh
+    - name: Docker containers start
+      command: docker start {{ container_name }}
