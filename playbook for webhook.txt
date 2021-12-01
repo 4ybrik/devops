@@ -1,0 +1,12 @@
+---
+ - name: Deploy image
+   hosts: all
+   become: yes
+
+
+   tasks:
+     - name: Docker pull latest image
+       command: docker pull a9fef026aa43/new-app:latest
+
+     - name: Docker run on every server
+       command: docker run -d -v /var/www/html:/usr/share/nginx/html -p 8888:80 --name deployed-container a9fef026aa43/new-app
