@@ -1,0 +1,3 @@
+#/etc/prometheus/targets.d/node.yml
+- targets:
+    - 'srv1.campusX.ws.nsrc.org:9100'
