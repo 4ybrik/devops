@@ -1,0 +1,2 @@
+node_memory_MemTotal_bytes{instance="13.59.207.176:9100",job="node-exporter"} - 
+node_memory_MemFree_bytes{instance="13.59.207.176:9100",job="node-exporter"} - node_memory_Cached_bytes{job="node-exporter", instance="13.59.207.176:9100"} - node_memory_Buffers_bytes{instance="13.59.207.176:9100", job="node-exporter"}
