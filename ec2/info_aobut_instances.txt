@@ -1,0 +1,3 @@
+#ФУЛ ИНФА ОБ ВСЕХ ИНСТАНСАХ, ТА ЧТО НУЖНА
+#!/bin/bash
+aws ec2 describe-instances --query 'Reservations[].Instances[].[Placement.AvailabilityZone, State.Name, InstanceId,InstanceType,PlatformDetails,PublicIpAddress,CpuOptions.CoreCount,CpuOptions.ThreadsPerCore]' --output table

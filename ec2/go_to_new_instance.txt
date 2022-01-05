@@ -1,0 +1,8 @@
+#ДЕЙСТВИЯ ДЛЯ ЗАХОДА НА СЕРВЕР ПО КЛЮЧУ, ЧТОБЫ ПОТОМ ПОМЕНЯТЬ ЕГО(СМЕНА АЙПИ)
+#!/bin/bash
+ssh -i key1name.pem ubuntu@18.222.89.110
+#sudo apt-get install awscli
+sudo apt-get install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install

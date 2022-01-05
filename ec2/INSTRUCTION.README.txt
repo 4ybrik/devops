@@ -1,0 +1,16 @@
+#ДЕЙСТВИЯ ПОСЛЕ ЗАХОДА НА СЕРВЕР, Т.Е. ПОСЛЕ ФАЙЛА GO_TO
+aws configure
+----------
+AKIA3GCDDMBATMCEI6SU
+GsyYt1e5VPLHm5KtSbppNgkCckEMUK3bAOC99Bis
+us-east-2
+json
+----------
+ssh-keygen -t rsa -f mynew_key
+---------
+aws ec2-instance-connect send-ssh-public-key --region us-east-2 --instance-id i-0e9ceb07285a2a8c4 --availability-zone us-east-2c --instance-os-user ubuntu --ssh-publ>
+здесь можно поменять region на свой, instance-id обязательно на свой, зона в основном совпадает, как и регион, ос-юзер обычно всегда убунту, ключ мы ему задали имя
+называется mynew_key
+---------
+ssh -i mynew_key ubuntu@18.222.89.110
+также тут можно свапнуть название ключа и обязательно наш айпишник.

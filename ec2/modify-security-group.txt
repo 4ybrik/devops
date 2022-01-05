@@ -1,0 +1,3 @@
+#ЗДЕСЬ Я ИНСТАНСУ ПО АЙДИ ПРИСВАИВАЮ ГРУППУ, НУЖНО, ЧТОБЫ ЗАЙТИ ВПРИНИЦПЕ НА НА ИНСТАНС. ПОМЕНЯТЬ АЙДИ, ГРУППУ НЕ СТОИТ
+#!/bin/bash
+aws ec2 modify-instance-attribute --instance-id i-0e9ceb07285a2a8c4 --groups sg-026357bf36972accf

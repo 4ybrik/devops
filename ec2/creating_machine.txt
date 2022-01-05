@@ -1,0 +1,32 @@
+#СОЗДАНИЕ МАШИНЫ
+#!/usr/bin/env python
+import boto3
+#import stun
+ec2 = boto3.client('ec2')
+#client = boto3.resource('ec2',
+#    aws_access_key_id=AKIA3GCDDMBATMCEI6SU,
+#    aws_secret_access_key=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,
+#    region_name='us-east-2')
+
+# create a new EC2 instance
+instances = ec2.run_instances(
+     ImageId='ami-0fb653ca2d3203ac1',
+     MinCount=1,
+     MaxCount=1,
+     InstanceType='t2.micro',
+     KeyName='key1name'
+#     SecurityGroups=[
+#                        {
+#                            "GroupName": "launch-wizard-7",
+#                            "GroupId": "sg-026357bf36972accf"
+#                        }
+#                    ],
+#     SecurityGroups.CroupName='launch-wizard-7'
+#     SecurityGroups.GroupId='sg-026357bf36972accf'
+     NetworkInterfaces.Groups.GroupName='launch-wizard-7'
+     NetworkInterfaces.Groups.GroupId='sg-026357bf36972accf'
+ )
+#Myec2=ec2.describe_instances()
+#for pythonins in Myec2['Reservations']:
+# for printout in pythonins['Instances']:
+#  print(printout['InstanceType'])

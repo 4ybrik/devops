@@ -1,0 +1,12 @@
+#УБИЙСТВО ИНТСАНСА, ПОМЕНЯТЬ АЙДИ НА НУЖНЫЙ
+#!/usr/bin/env python
+
+import boto3
+ids = ['i-067d3b060a9c05f65']
+
+ec2 = boto3.client('ec2')
+#instance_id=$(aws ec2 describe-instances --query 'Reservations[$1].Instances[0].{Instance:InstanceId}' --output text')
+#ec2.terminate_instances([$instance_id])
+#ec2.terminate_instances([i-058132c78a41d49c1])
+ec2.stop_instances(InstanceIds=ids)
+ec2.terminate_instances(InstanceIds=ids)

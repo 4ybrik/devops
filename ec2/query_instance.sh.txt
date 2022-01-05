@@ -1,0 +1,19 @@
+#СКРИПТ ДЛЯ ВЫВОДА ВСЕХ ИНСТАНС АЙДИШНИКОВ И ЗАПИСЬ В ФАЙЛ
+#!/bin/bash
+while [ true ]
+ do
+#  counter=0
+#  default_query=$(aws ec2 describe-instances --query 'Reservations['$counter'].Instances[0].{Instance:InstanceId}' --output text)
+#  while [ $default_query -ne None ]
+#   do
+#    ((counter++))
+#   done
+# cat /dev/null > all_instances.txt
+#  for (( i = 0; i < $counter; i++ ))
+#  do
+#   echo $default_query >> all_instances.txt
+#  done
+  query=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Instance:InstanceId}' --output text)
+  cat /dev/null > query_instances.txt
+  echo $query >> query_instances.txt
+ done
