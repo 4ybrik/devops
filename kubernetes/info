@@ -1,0 +1,36 @@
+kubectl get nodes
+kubectl get nodes --context kind-kind    // --context kind-max-1
+kubectl cluster-info                     // bez kommentariev
+kind create cluster --name some_name     // sozdanie clustera
+kubectl config get-contexts              // poluchit infu o vseh clusterah + pokazivaet kakoi seychas vibran
+kubectl get nodes -o wide                // infa o nodah v vide docker ps 
+kubectl config use-contexts kind-kind    // switcnut' tekushiy node na kakoi libo
+kind delete cluster --name some_name     // udalenie clustera
+
+-------------------------
+
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+kubectl get deployments                  // spisok deploymentov
+kubectl proxy                            // vse chto proishodt - lokalno, podi v clustere vidyat drug druga, no dostypa vne - net
+curl http://localhost:8081               // pochemy port 8081? neponyatno
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+echo Name of the Pod: $POD_NAME          // tak kak API server delaet endpoint dlya kajdogo poda, bilo bi neploho naznachit imya 
+curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/   // obrashenie k 8081 porty -> k nashemy pody
+kubectl describe pods                    // chtobi posmotret kakie konteineri vnutri dannogo poda i kakie obrazi 
+                                         // uzaytsa dlya bilda etogo conteinera
+kubectl logs $POD_NAME                   // dlya checka logov nashego poda
+kubectl exec $POD_NAME -- env            // list s peremennimi
+kubectl exec -ti $POD_NAME -- bash       // zaiti v nash pod kak v docker container
+curl localhost:8080                      // teper prilaga rabotaet na 8080 ( v pode )
+                                         // kajdii pod imeet unikalnii ip adress , no on imeet jiznennii cycle, poetmoy mojet umeret
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080   // sozdat' service 
+kubectl get services                     // spisok servisov
+kubectl describe services/kubernetes-bootcamp  // chtobi uvidet info o servise ( primer port )
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT                // sozdat peremennuy node_port
+curl $(minikube ip):$NODE_PORT           // curl chto na servise nahoditsya : nash port
+kubectl describe deployment              // label name
+kubectl get pods -l app=kubernetes-bootcamp  // check pod
+kubectl get services -l app=kubernetes-bootcamp // dlya servisa
+kubectl delete service -l app=kubernetes-bootcamp  // delete servis
+kubectl exec -ti $POD_NAME -- curl localhost:8080  // zaity v pod i checknut chto na localhoste port 8080
