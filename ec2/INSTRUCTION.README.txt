@@ -8,7 +8,7 @@ json
 ----------
 ssh-keygen -t rsa -f mynew_key
 ---------
-aws ec2-instance-connect send-ssh-public-key --region us-east-2 --instance-id i-0e9ceb07285a2a8c4 --availability-zone us-east-2c --instance-os-user ubuntu --ssh-publ>
+aws ec2-instance-connect send-ssh-public-key --region us-east-1 --instance-id i-0989ec3292613a4f9 --availability-zone us-east-1f --instance-os-user ec2-user --ssh-public-key file://mynew_key.pub
 здесь можно поменять region на свой, instance-id обязательно на свой, зона в основном совпадает, как и регион, ос-юзер обычно всегда убунту, ключ мы ему задали имя
 называется mynew_key
 ---------

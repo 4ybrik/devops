@@ -1,0 +1,22 @@
+terraform init // initializatsiya packetov dlya nashego providera
+terraform plan // chtoto vrode debuggera
+terraform apply // uzhe neposrestvenno sozdanie
+// pri povtornom napisanii ne sozdaetsya noviy instance
+
+// v faile tf v resource mojno zapisat "count = 3" , chtobi sdelat neskolko serverov
+// pri pryamom izmenenii tf fila, sovershaetsya change. t.e. bil server t2.nano, perepisivaesh na t2.micro
+// proishodit change, terraform plan eto pokajet. apply proverit i prosto zamenit tip servera (genialno!)
+// ostaetsya tot je instance_id
+// pri izmenenii count ( menshe ) proizoydet terminate kakih to instancov
+// pri izmenenii count na 0 prosto vse terminiruet
+// sterev chtoto s tf file - tak je delete
+
+terraform destroy // unichtojit vse s tf-a
+
+// sleduet steret credi s tf-a, chtobi ih ne ukrali, dlya etogo udalyaem i sozdaem ENV v terminale
+
+export AWS_ACCESS_KEY_ID=vash_key
+export AWS_SECRET_ACCESS_KEY=vash_secret-key
+
+// posle etogo terraform ponimaet po vashim ENV vashi credi
+export AWS_DEFAULT_REGION=vash_region_number // takje dlya regiona

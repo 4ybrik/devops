@@ -1,0 +1,23 @@
+provider "aws" {
+region = "us-east-2"
+}
+
+resource "aws_instance" "ubuntu-terraform-instance" {
+ami = "ami-0fb653ca2d3203ac1"
+instance_type = "t2.micro"
+tags = {
+Name = "ubuntu-terraform-instance"
+Owner = "Maxim Verbitskiy"
+Project = "My terraform"
+}
+}
+
+resource "aws_instance" "amazon-terraform-instance" {
+ami = "ami-0231217be14a6f3ba"
+instance_type = "t2.micro"
+tags = {
+Name = "amazon-terraform-instance"
+Owner = "Maxim Verbitskiy"
+Project = "My terraform"
+}
+}
